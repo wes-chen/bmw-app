@@ -1,0 +1,19 @@
+{
+  "name": "bmw-app",
+  "version": "1.0.0",
+  "description": "chat webapp leveraging sound feedback",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wes-chen/bmw-app.git"
+  },
+  "author": "Wesley Chen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wes-chen/bmw-app/issues"
+  },
+  "homepage": "https://github.com/wes-chen/bmw-app#readme"
+}
