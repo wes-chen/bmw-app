@@ -10,6 +10,7 @@ $(function() {
   // Initialize variables
   const $window = $(window);
   const $usernameInput = $('.usernameInput'); // Input for username
+  // const $soundInput = $('.soundInput'); // Input for sound
   const $messages = $('.messages');           // Messages area
   const $inputMessage = $('.inputMessage');   // Input message input box
 
@@ -35,7 +36,7 @@ $(function() {
     log(message);
   }
 
-  // Sets the client's username
+  // Sets the client's username and sound?
   const setUsername = () => {
     username = cleanInput($usernameInput.val().trim());
 
@@ -234,6 +235,9 @@ $(function() {
   // Whenever the server emits 'new message', update the chat body
   socket.on('new message', (data) => {
     addChatMessage(data);
+    console.log("MESSAGE SENT");
+    let sound = new Audio("hello.wav");
+    sound.play();
   });
 
   // Whenever the server emits 'user joined', log it in the chat body
