@@ -3,9 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Socket.IO Chat Example</title>
+  <title>BMW APP</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="shortcut icon" href="../favicon.ico">
+  <link rel="stylesheet" href="vmsg.css">
+  <link rel="shortcut icon" href="favicon.ico">
+  <script src="audiorecord.js" type="module"></script>
 </head>
 
 <body>
@@ -19,8 +21,12 @@
     <li class="login page">
       <div class="form">
         <h3 class="title">What's your nickname?</h3>
+        <h3 class="title">Press Enter to continue to chat!</h3>
         <input class="usernameInput" type="text" maxlength="14" />
-        <!-- <input class="soundInput" type="file" accept="audio/*" capture> -->
+        <div id="controls">
+          <button id="recordButtonHello">Record Hello</button>
+          <button id="recordButtonUrgent">Record Urgent</button>
+        </div>
       </div>
     </li>
   </ul>

@@ -19,6 +19,7 @@ $(function() {
 
   const socket = io();
 
+  let blob;
   // Prompt for setting a username
   let username;
   let connected = false;
@@ -54,6 +55,7 @@ $(function() {
 
   // Sends a chat message
   const sendMessage = () => {
+    // sound.play();
     let message = $inputMessage.val();
     // Prevent markup from being injected into the message
     message = cleanInput(message);
@@ -62,7 +64,11 @@ $(function() {
       $inputMessage.val('');
       addChatMessage({ username, message });
       // tell server to execute 'new message' and send along one parameter
-      socket.emit('new message', message);
+      let helloURL = window.localStorage.getItem('helloURL');
+      // console.log("I SENT A MESSAGE AND THE URL IS: ", helloURL);
+      fetch(helloURL)
+        .then(r => r.blob())
+        .then(data => socket.emit('new message', message, data));
     }
   }
 
@@ -225,7 +231,7 @@ $(function() {
   socket.on('login', (data) => {
     connected = true;
     // Display the welcome message
-    const message = 'Welcome to Socket.IO Chat – ';
+    const message = 'Welcome to BMW Chat – ';
     log(message, {
       prepend: true
     });
@@ -234,9 +240,13 @@ $(function() {
 
   // Whenever the server emits 'new message', update the chat body
   socket.on('new message', (data) => {
+    console.log(data);
     addChatMessage(data);
-    console.log("MESSAGE SENT");
-    let sound = new Audio("hello.wav");
+    // TODO add new method here that decodes and plays audio received
+    console.log("MESSAGE RECEIVED, sound is:\n", data.sound);
+    var blob = new Blob([data.sound], { 'type' : 'audio/mpeg' });
+    var url = URL.createObjectURL(blob);
+    var sound = new Audio(url);
     sound.play();
   });
 
