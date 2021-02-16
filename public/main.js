@@ -57,7 +57,7 @@ $(function() {
   const sendMessage = () => {
     let helloURL = window.localStorage.getItem('helloURL');
     let sound = new Audio(helloURL);
-    sound.play();
+    // sound.play();
     console.log("I SENT A MESSAGE AND THE URL IS: ", helloURL);
     let message = $inputMessage.val();
     // Prevent markup from being injected into the message
