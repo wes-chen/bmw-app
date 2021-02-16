@@ -1,16 +1,18 @@
 import { record } from "./vmsg.js";
 
-let recordButton = document.getElementById("recordButton");
-recordButton.onclick = function() {
+let recordHello = document.getElementById("recordButtonHello");
+recordHello.onclick = function() {
   record({wasmURL: "vmsg.wasm"}).then(blob => {
-    console.log("Recorded MP3", blob);
-    // TODO BRI LOCAL STORAGE
-    
+    console.log("Recorded MP3 for Hello", blob);
+    var url = URL.createObjectURL(blob);
+    window.localStorage.setItem('helloURL', url);
+  });
+};
 
-    // var url = URL.createObjectURL(blob);
-    // var preview = document.createElement('audio');
-    // preview.controls = true;
-    // preview.src = url;
-    // document.body.appendChild(preview);
+let recordUrgent = document.getElementById("recordButtonUrgent");
+recordUrgent.onclick = function() {
+  record({wasmURL: "vmsg.wasm"}).then(blob => {
+    console.log("Recorded MP3 for Urgent", blob);
+    var url = URL.createObjectURL(blob);
   });
 };

@@ -55,6 +55,10 @@ $(function() {
 
   // Sends a chat message
   const sendMessage = () => {
+    let helloURL = window.localStorage.getItem('helloURL');
+    let sound = new Audio(helloURL);
+    sound.play();
+    console.log("I SENT A MESSAGE AND THE URL IS: ", helloURL);
     let message = $inputMessage.val();
     // Prevent markup from being injected into the message
     message = cleanInput(message);
@@ -63,7 +67,7 @@ $(function() {
       $inputMessage.val('');
       addChatMessage({ username, message });
       // tell server to execute 'new message' and send along one parameter
-      socket.emit('new message', message);
+      socket.emit('new message', message, sound);
     }
   }
 
@@ -234,11 +238,10 @@ $(function() {
   });
 
   // Whenever the server emits 'new message', update the chat body
-  socket.on('new message', (data) => {
+  socket.on('new message', (data, sound) => {
     addChatMessage(data);
     // TODO add new method here that decodes and plays audio received
     console.log("MESSAGE RECEIVED");
-    let sound = new Audio("hello.wav");
     sound.play();
   });
 
