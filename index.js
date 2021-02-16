@@ -26,6 +26,7 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('new message', {
       username: socket.username,
       message: data
+      // new audio parameter
     });
   });
 

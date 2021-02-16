@@ -225,7 +225,7 @@ $(function() {
   socket.on('login', (data) => {
     connected = true;
     // Display the welcome message
-    const message = 'Welcome to Socket.IO Chat – ';
+    const message = 'Welcome to BMW Chat – ';
     log(message, {
       prepend: true
     });
@@ -235,7 +235,8 @@ $(function() {
   // Whenever the server emits 'new message', update the chat body
   socket.on('new message', (data) => {
     addChatMessage(data);
-    console.log("MESSAGE SENT");
+    // TODO add new method here that decodes and plays audio received
+    console.log("MESSAGE RECEIVED");
     let sound = new Audio("hello.wav");
     sound.play();
   });
