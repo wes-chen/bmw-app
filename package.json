@@ -18,6 +18,7 @@
   "homepage": "https://github.com/wes-chen/bmw-app#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "socket.io": "^3.1.1"
+    "socket.io": "^3.1.1",
+    "vmsg": "^0.3.6"
   }
 }

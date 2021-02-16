@@ -19,6 +19,7 @@ $(function() {
 
   const socket = io();
 
+  let blob;
   // Prompt for setting a username
   let username;
   let connected = false;
