@@ -356,8 +356,8 @@ export class Form {
     this.clearAll();
 
     const instructions = document.createElement("p");
-    instructions.className = "TODO";
-    instructions.textContent = "Mylinh is such a pro!"
+    instructions.className = "record-header";
+    instructions.textContent = "Press record to create your custom sound";
     this.popup.appendChild(instructions);
 
     const recordRow = document.createElement("div");
