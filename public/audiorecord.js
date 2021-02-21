@@ -14,5 +14,6 @@ recordUrgent.onclick = function() {
   record({wasmURL: "vmsg.wasm"}).then(blob => {
     console.log("Recorded MP3 for Urgent", blob);
     var url = URL.createObjectURL(blob);
+    window.localStorage.setItem('urgentURL', url);
   });
 };
