@@ -16,6 +16,8 @@ $(function() {
 
   const $loginPage = $('.login.page');        // The login page
   const $chatPage = $('.chat.page');          // The chatroom page
+  const $urgentButton = $('#urgent');         // urgent button
+  const $normalButton = $('#normal');         // normal button
 
   const socket = io();
 
@@ -54,7 +56,7 @@ $(function() {
   }
 
   // Sends a chat message
-  const sendMessage = () => {
+  const sendMessage = (urgent) => {
     // sound.play();
     let message = $inputMessage.val();
     // Prevent markup from being injected into the message
@@ -64,9 +66,9 @@ $(function() {
       $inputMessage.val('');
       addChatMessage({ username, message });
       // tell server to execute 'new message' and send along one parameter
-      let helloURL = window.localStorage.getItem('helloURL');
+      let soundURL = urgent ? window.localStorage.getItem('urgentURL') : window.localStorage.getItem('helloURL');
       // console.log("I SENT A MESSAGE AND THE URL IS: ", helloURL);
-      fetch(helloURL)
+      fetch(soundURL)
         .then(r => r.blob())
         .then(data => socket.emit('new message', message, data));
     }
@@ -200,7 +202,7 @@ $(function() {
     // When the client hits ENTER on their keyboard
     if (event.which === 13) {
       if (username) {
-        sendMessage();
+        sendMessage(false);
         socket.emit('stop typing');
         typing = false;
       } else {
@@ -223,6 +225,18 @@ $(function() {
   // Focus input when clicking on the message input's border
   $inputMessage.click(() => {
     $inputMessage.focus();
+  });
+
+  $urgentButton.click(() => {
+    sendMessage(true);
+    socket.emit('stop typing');
+    typing = false;
+  });
+
+  $normalButton.click(() => {
+    sendMessage(false);
+    socket.emit('stop typing');
+    typing = false;
   });
 
   // Socket events
