@@ -136,27 +136,25 @@ ul {
 
 /* chat bubble of message body */
 .messageBody-hello {
-
-	margin: 14px;
+  margin: 14px;
   display: inline-block;
   position: relative;
-	width: auto;
-	height: auto;
+  width: auto;
+  height: auto;
   padding: 10px 20px 10px 20px;
-	background-color: #d5e9f6;
+  background-color: #d5e9f6;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
 }
 
 .messageBody-urgent {
-
-	margin: 14px;
+  margin: 14px;
   display: inline-block;
   position: relative;
-	width: auto;
-	height: auto;
+  width: auto;
+  height: auto;
   padding: 10px 20px 10px 20px;
-	background-color: #f6d5d5;
+  background-color: #f6d5d5;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
 }
