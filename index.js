@@ -29,12 +29,13 @@ io.on('connection', (socket) => {
   let addedUser = false;
 
   // when the client emits 'new message', this listens and executes
-  socket.on('new message', (data, sound) => {
+  socket.on('new message', (data, sound, urgent) => {
     // we tell the client to execute 'new message'
     socket.broadcast.emit('new message', {
       username: socket.username,
       message: data,
-      sound: sound
+      sound: sound,
+      urgent: urgent
     });
   });
 

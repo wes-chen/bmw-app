@@ -57,20 +57,19 @@ $(function() {
 
   // Sends a chat message
   const sendMessage = (urgent) => {
-    // sound.play();
     let message = $inputMessage.val();
     // Prevent markup from being injected into the message
     message = cleanInput(message);
     // if there is a non-empty message and a socket connection
     if (message && connected) {
       $inputMessage.val('');
-      addChatMessage({ username, message });
+      addChatMessage({ username, message, urgent });
       // tell server to execute 'new message' and send along one parameter
       let soundURL = urgent ? window.localStorage.getItem('urgentURL') : window.localStorage.getItem('helloURL');
       // console.log("I SENT A MESSAGE AND THE URL IS: ", helloURL);
       fetch(soundURL)
         .then(r => r.blob())
-        .then(data => socket.emit('new message', message, data));
+        .then(data => socket.emit('new message', message, data, urgent));
     }
   }
 
@@ -91,7 +90,8 @@ $(function() {
     const $usernameDiv = $('<span class="username"/>')
       .text(data.username)
       .css('color', getUsernameColor(data.username));
-    const $messageBodyDiv = $('<span class="messageBody">')
+    // Message body is red if urgent
+    const $messageBodyDiv = $(data.urgent ? '<span class="messageBody-urgent">' : '<span class="messageBody-hello">')
       .text(data.message);
 
     const typingClass = data.typing ? 'typing' : '';
@@ -256,8 +256,6 @@ $(function() {
   socket.on('new message', (data) => {
     console.log(data);
     addChatMessage(data);
-    // TODO add new method here that decodes and plays audio received
-    console.log("MESSAGE RECEIVED, sound is:\n", data.sound);
     var blob = new Blob([data.sound], { 'type' : 'audio/mpeg' });
     var url = URL.createObjectURL(blob);
     var sound = new Audio(url);
