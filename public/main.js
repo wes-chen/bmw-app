@@ -91,7 +91,12 @@ $(function() {
       .text(data.username)
       .css('color', getUsernameColor(data.username));
     // Message body is red if urgent
-    const $messageBodyDiv = $(data.urgent ? '<span class="messageBody-urgent">' : '<span class="messageBody-hello">')
+    var messageBodyClass = '';
+    if (!data.typing){
+      messageBodyClass = data.urgent ? 'urgent' : 'hello';
+    }
+    const $messageBodyDiv = $('<span class="messageBody">')
+      .addClass(messageBodyClass)
       .text(data.message);
 
     const typingClass = data.typing ? 'typing' : '';
