@@ -136,7 +136,7 @@ ul {
 }
 
 /* chat bubble of message body */
-.messageBody-hello {
+.messageBody.hello {
   margin: 14px;
   display: inline-block;
   position: relative;
@@ -148,7 +148,7 @@ ul {
   -moz-border-radius: 30px;
 }
 
-.messageBody-urgent {
+.messageBody.urgent {
   margin: 14px;
   display: inline-block;
   position: relative;
