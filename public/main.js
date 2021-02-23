@@ -245,7 +245,7 @@ $(function() {
   socket.on('login', (data) => {
     connected = true;
     // Display the welcome message
-    const message = 'Welcome to BMW Chat!';
+    const message = 'Welcome to BMW Chat!!';
     log(message, {
       prepend: true
     });
