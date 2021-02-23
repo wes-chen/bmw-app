@@ -120,8 +120,9 @@ ul {
   height: 100%;
   margin: 0;
   overflow-y: scroll;
-  overflow-x: auto;
+  word-break: break-all;
   padding: 10px 20px 10px 20px;
+
 }
 
 .message.typing .messageBody {
