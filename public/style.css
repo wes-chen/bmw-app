@@ -96,6 +96,7 @@ ul {
 
 .messages {
   font-size: 150%;
+  text-align: left;
 }
 
 .inputMessage {
@@ -129,15 +130,17 @@ ul {
 }
 
 .username {
-  font-weight: 700;
+  font-size: 80%;
   overflow: hidden;
   padding-right: 15px;
-  text-align: right;
+  display: block;
 }
 
 /* chat bubble of message body */
 .messageBody.hello {
-  margin: 14px;
+  margin-top: 5px;
+  margin-right: 10px;
+  margin-bottom: 30px;
   display: inline-block;
   position: relative;
   width: auto;
@@ -149,7 +152,9 @@ ul {
 }
 
 .messageBody.urgent {
-  margin: 14px;
+  margin-top: 5px;
+  margin-right: 10px;
+  margin-bottom: 30px;
   display: inline-block;
   position: relative;
   width: auto;
