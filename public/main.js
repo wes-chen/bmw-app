@@ -63,7 +63,7 @@ $(function() {
     // if there is a non-empty message and a socket connection
     if (message && connected) {
       $inputMessage.val('');
-      addChatMessage({ username, message, urgent });
+      addChatMessage({ username, message, urgent }, true);
       // tell server to execute 'new message' and send along one parameter
       let soundURL = urgent ? window.localStorage.getItem('urgentURL') : window.localStorage.getItem('helloURL');
       // console.log("I SENT A MESSAGE AND THE URL IS: ", helloURL);
@@ -82,6 +82,7 @@ $(function() {
   // Adds the visual chat message to the message list
   const addChatMessage = (data, options) => {
     // Don't fade the message in if there is an 'X was typing'
+    console.log("options" + options);
     const $typingMessages = getTypingMessages(data);
     if ($typingMessages.length !== 0) {
       $typingMessages.remove();
@@ -89,13 +90,16 @@ $(function() {
 
     const $usernameDiv = $('<span class="username"/>')
       .text(data.username)
+      .css('text-align', options ? 'right' : '')
       .css('color', getUsernameColor(data.username));
     // Message body is red if urgent
     var messageBodyClass = '';
     if (!data.typing){
       messageBodyClass = data.urgent ? 'urgent' : 'hello';
     }
-    const $messageBodyDiv = $('<span class="messageBody">')
+
+    // TODO Bri: options is a boolean with True if it is sent by the user, Undefined if it is not
+    const $MessageBodyDiv = $('<span class="messageBody">')
       .addClass(messageBodyClass)
       .text(data.message);
 
