@@ -99,7 +99,7 @@ $(function() {
     }
 
     // TODO Bri: options is a boolean with True if it is sent by the user, Undefined if it is not
-    const $MessageBodyDiv = $('<span class="messageBody">')
+    const $messageBodyDiv = $('<span class="messageBody">')
       .addClass(messageBodyClass)
       .text(data.message);
 
