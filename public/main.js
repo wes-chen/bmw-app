@@ -107,7 +107,8 @@ $(function() {
     const $messageDiv = $('<li class="message"/>')
       .data('username', data.username)
       .addClass(typingClass)
-      .append($usernameDiv, $messageBodyDiv);
+      .append($usernameDiv, $messageBodyDiv)
+      .css('text-align', options ? 'right' : '');
 
     addMessageElement($messageDiv, options);
   }
