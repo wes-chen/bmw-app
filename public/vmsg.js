@@ -318,7 +318,7 @@ export class Form {
     this.recorder.initAudio()
       .then(() => this.drawInit())
       .then(() => this.recorder.initWorker())
-      .then(() => this.drawAll())
+      .then(() => this.drawAll(opts.urgent))
       .catch((err) => this.drawError(err));
   }
 
@@ -351,14 +351,14 @@ export class Form {
   }
 
   // TODO MYLINH add text to this popup
-  drawAll() {
+  drawAll(urgent) {
     this.drawInit();
     this.clearAll();
 
-    const instructions = document.createElement("p");
-    instructions.className = "record-header";
-    instructions.textContent = "Press record to create your custom sound";
-    this.popup.appendChild(instructions);
+    const say = document.createElement("h3");
+    say.className = "record-header";
+    say.textContent = urgent ? "Say 'Urgent!' in your recording.": "Say 'Hello!' in your recording.";
+    this.popup.appendChild(say);
 
     const recordRow = document.createElement("div");
     recordRow.className = "vmsg-record-row";
@@ -376,6 +376,31 @@ export class Form {
     stopBtn.textContent = "■";
     stopBtn.addEventListener("click", () => this.stopRecording());
     recordRow.appendChild(stopBtn);
+
+    const instructions1 = document.createElement("p");
+    instructions1.className = "record-header";
+    instructions1.textContent += "1. Tap on the red circle to begin recording.";
+    this.popup.appendChild(instructions1);
+
+    const instructions2 = document.createElement("p");
+    instructions2.className = "record-header";
+    instructions2.textContent += "2. Tap on the black square to stop recording.";
+    this.popup.appendChild(instructions2);
+
+    const instructions3 = document.createElement("p");
+    instructions3.className = "record-header";
+    instructions3.textContent += "3. Tap on the duration to play back.";
+    this.popup.appendChild(instructions3);
+
+    const instructions4 = document.createElement("p");
+    instructions4.className = "record-header";
+    instructions4.textContent += "4. Repeat steps 1-3 until you're ready!";
+    this.popup.appendChild(instructions4);
+
+    const instructions5 = document.createElement("p");
+    instructions5.className = "record-header";
+    instructions5.textContent += "5. Press the check mark when you're done!";
+    this.popup.appendChild(instructions5);
 
     const audio = this.audio = new Audio();
     audio.autoplay = true;
