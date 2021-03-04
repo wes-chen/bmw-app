@@ -366,14 +366,14 @@ export class Form {
 
     const recordBtn = this.recordBtn = document.createElement("button");
     recordBtn.className = "vmsg-button vmsg-record-button";
-    recordBtn.textContent = "●";
+    recordBtn.textContent = "Record";
     recordBtn.addEventListener("click", () => this.startRecording());
     recordRow.appendChild(recordBtn);
 
     const stopBtn = this.stopBtn = document.createElement("button");
     stopBtn.className = "vmsg-button vmsg-stop-button";
     stopBtn.style.display = "none";
-    stopBtn.textContent = "■";
+    stopBtn.textContent = "Stop";
     stopBtn.addEventListener("click", () => this.stopRecording());
     recordRow.appendChild(stopBtn);
 
@@ -421,7 +421,7 @@ export class Form {
 
     const saveBtn = this.saveBtn = document.createElement("button");
     saveBtn.className = "vmsg-button vmsg-save-button";
-    saveBtn.textContent = "✓";
+    saveBtn.textContent = "Done";
     saveBtn.disabled = true;
     saveBtn.addEventListener("click", () => this.close(this.recorder.blob));
     recordRow.appendChild(saveBtn);
