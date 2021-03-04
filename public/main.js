@@ -9,8 +9,6 @@ $(function() {
 
   // Initialize variables
   const $window = $(window);
-  const $usernameInput = $('.usernameInput'); // Input for username
-  // const $soundInput = $('.soundInput'); // Input for sound
   const $messages = $('.messages');           // Messages area
   const $inputMessage = $('.inputMessage');   // Input message input box
 
@@ -18,7 +16,7 @@ $(function() {
   const $chatPage = $('.chat.page');          // The chatroom page
   const $urgentButton = $('#urgent');         // urgent button
   const $normalButton = $('#normal');         // normal button
-
+  const $enterChatButton = $('#enter');
   const socket = io();
 
   let blob;
@@ -27,7 +25,7 @@ $(function() {
   let connected = false;
   let typing = false;
   let lastTypingTime;
-  let $currentInput = $usernameInput.focus();
+  let $currentInput = $enterChatButton.focus();
 
   const addParticipantsMessage = (data) => {
     let message = '';
@@ -41,7 +39,7 @@ $(function() {
 
   // Sets the client's username and sound?
   const setUsername = () => {
-    username = cleanInput($usernameInput.val().trim());
+    username = cleanInput($('#name').text().trim());
 
     // If the username is valid
     if (username) {
@@ -215,8 +213,6 @@ $(function() {
         sendMessage(false);
         socket.emit('stop typing');
         typing = false;
-      } else {
-        setUsername();
       }
     }
   });
@@ -227,10 +223,28 @@ $(function() {
 
   // Click events
 
-  // Focus input when clicking anywhere on login page
-  $loginPage.click(() => {
-    $currentInput.focus();
-  });
+  $enterChatButton.click(()=>{
+    console.log("enter chat clicked!")
+    if (window.localStorage.getItem('helloSet') === "SET"
+      && window.localStorage.getItem('urgentSet') === "SET"
+      && window.localStorage.getItem('fbSet') === "SET"){
+      setUsername();
+    } else {
+      if (window.localStorage.getItem('helloSet') !== "SET"){
+        $(".defaultrecord").css("color","#FF7272")
+        $(".defaultrecord").css("border-color","#FF7272")
+      }
+      if (window.localStorage.getItem('urgentSet') !== "SET"){
+        $(".urgentrecord").css("color","#FF7272")
+        $(".urgentrecord").css("border-color","#FF7272")
+      }
+      if (window.localStorage.getItem('fbSet') !== "SET"){
+        $(".fbrecord").css("color","#FF7272")
+        $(".fbrecord").css("border-color","#FF7272")
+      }
+      console.log("NOT SET!")
+    }
+  })
 
   // Focus input when clicking on the message input's border
   $inputMessage.click(() => {
