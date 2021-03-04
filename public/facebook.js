@@ -1,6 +1,22 @@
 function clearSet(){
   console.log("cleared settings")
   window.localStorage.clear();
+
+  var source = document.getElementById("descriptiontemplate").innerHTML;
+  // compile the template
+  var template = Handlebars.compile(source);
+  // execute the compiled template and print the output to the console
+  var context = {
+    descriptions: [{
+        description: "Get message notifications with sounds unique to each user."
+      },
+      {
+        description: "Never miss an urgent message again."
+      }
+    ]
+  };
+  html = template(context);
+  $("#descriptionarea").append(html);
 }
 
 function checkLoginState(){
