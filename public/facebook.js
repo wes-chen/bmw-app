@@ -7,12 +7,12 @@ function checkLoginState(){
 function statusChangeCallback(response){
   if (response.status === 'connected'){
     console.log('Successfully logged in with Facebook');
-    FB.api('/me?fields=first_name', changeUser);
+    FB.api('/me?fields=name,first_name,picture.width(480)', changeUser);
   }
 }
 function changeUser(response){
   $('.facebookLogin').hide();
   $('#name').text(response.first_name);
-  // $('#photo').attr("src", response.picture.data.url);
+  $('#photo').attr("src", response.picture.data.url);
   // console.log(response);
 }

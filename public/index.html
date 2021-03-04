@@ -26,17 +26,19 @@
     <li class="login page">
       <div class="form">
         <h3 class="title">What's your nickname?</h3>
-        <h1 class="title" id="name">name</h1>
-        <p class="facebookLogin">Please login through Facebook
+        <h1 class="title usernameInput" id="name"></h1>
+        <p class="facebookLogin">
           <fb:login-button scope="public_profile" onlogin="checkLoginState();">
           </fb:login-button>
         </p>
-        <h3 class="title">Press Enter to continue to chat!</h3>
-        <input class="usernameInput" type="text" maxlength="14" />
+        <img id="photo" />
+        <!-- <h3 class="title">Press Enter to continue to chat!</h3> -->
+        <!-- <input class="usernameInput" type="text" maxlength="14" /> -->
         <div id="controls">
           <button id="recordButtonHello">Record Hello</button>
           <button id="recordButtonUrgent">Record Urgent</button>
         </div>
+        <button id="enter">Enter chat!</button>
       </div>
     </li>
   </ul>

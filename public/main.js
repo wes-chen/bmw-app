@@ -18,7 +18,7 @@ $(function() {
   const $chatPage = $('.chat.page');          // The chatroom page
   const $urgentButton = $('#urgent');         // urgent button
   const $normalButton = $('#normal');         // normal button
-
+  const $enterChatButton = $('#enter');
   const socket = io();
 
   let blob;
@@ -41,7 +41,7 @@ $(function() {
 
   // Sets the client's username and sound?
   const setUsername = () => {
-    username = cleanInput($usernameInput.val().trim());
+    username = cleanInput($usernameInput.text().trim());
 
     // If the username is valid
     if (username) {
@@ -215,8 +215,6 @@ $(function() {
         sendMessage(false);
         socket.emit('stop typing');
         typing = false;
-      } else {
-        setUsername();
       }
     }
   });
@@ -228,9 +226,14 @@ $(function() {
   // Click events
 
   // Focus input when clicking anywhere on login page
-  $loginPage.click(() => {
-    $currentInput.focus();
-  });
+  // $loginPage.click(() => {
+  //   $currentInput.focus();
+  // });
+
+  $enterChatButton.click(()=>{
+    console.log("enter chat clicked!")
+     setUsername();
+  })
 
   // Focus input when clicking on the message input's border
   $inputMessage.click(() => {
