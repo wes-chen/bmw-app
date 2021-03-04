@@ -308,7 +308,7 @@ export class Form {
     this.recorder.initAudio()
       .then(() => this.drawInit())
       .then(() => this.recorder.initWorker())
-      .then(() => this.drawAll())
+      .then(() => this.drawAll(opts.urgent))
       .catch((err) => this.drawError(err));
   }
 
@@ -340,7 +340,7 @@ export class Form {
     this.timer.textContent = pad2(secs / 60) + ":" + pad2(secs % 60);
   }
 
-  drawAll() {
+  drawAll(urgent) {
     this.drawInit();
     this.clearAll();
 
