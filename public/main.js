@@ -9,7 +9,6 @@ $(function() {
 
   // Initialize variables
   const $window = $(window);
-  const $usernameInput = $('.usernameInput'); // Input for username
   // const $soundInput = $('.soundInput'); // Input for sound
   const $messages = $('.messages');           // Messages area
   const $inputMessage = $('.inputMessage');   // Input message input box
@@ -27,7 +26,7 @@ $(function() {
   let connected = false;
   let typing = false;
   let lastTypingTime;
-  let $currentInput = $usernameInput.focus();
+  let $currentInput = $enterChatButton.focus();
 
   const addParticipantsMessage = (data) => {
     let message = '';
@@ -41,7 +40,7 @@ $(function() {
 
   // Sets the client's username and sound?
   const setUsername = () => {
-    username = cleanInput($usernameInput.text().trim());
+    username = cleanInput($('#name').text().trim());
 
     // If the username is valid
     if (username) {
@@ -232,7 +231,26 @@ $(function() {
 
   $enterChatButton.click(()=>{
     console.log("enter chat clicked!")
-     setUsername();
+    if (window.localStorage.getItem('helloSet') === "SET"
+      && window.localStorage.getItem('urgentSet') === "SET"
+      && window.localStorage.getItem('fbSet') === "SET"){
+      setUsername();
+    } else {
+      // TODO show the errors here.
+      if (window.localStorage.getItem('helloSet') !== "SET"){
+        $(".defaultrecord").css("color","#FF7272")
+        $(".defaultrecord").css("border-color","#FF7272")
+      }
+      if (window.localStorage.getItem('urgentSet') !== "SET"){
+        $(".urgentrecord").css("color","#FF7272")
+        $(".urgentrecord").css("border-color","#FF7272")
+      }
+      if (window.localStorage.getItem('fbSet') !== "SET"){
+        $(".fbrecord").css("color","#FF7272")
+        $(".fbrecord").css("border-color","#FF7272")
+      }
+      console.log("NOT SET!")
+    }
   })
 
   // Focus input when clicking on the message input's border

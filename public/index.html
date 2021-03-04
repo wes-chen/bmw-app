@@ -9,11 +9,14 @@
   <link rel="stylesheet" href="vmsg.css">
   <link rel="shortcut icon" href="favicon.ico">
   <script src="audiorecord.js" type="module"></script>
+  <script src="facebook.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body onload="clearSet()">
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId=777670113181631&autoLogAppEvents=1" nonce="EHuJemgW"></script>
   <ul class="pages">
     <li class="chat page">
       <div class="chatArea">
@@ -26,19 +29,56 @@
     </li>
     <li class="login page">
       <div class="form">
-        <h3 class="title">What's your nickname?</h3>
-        <h1 class="title usernameInput" id="name"></h1>
-        <p class="facebookLogin">
-          <fb:login-button scope="public_profile" onlogin="checkLoginState();">
-          </fb:login-button>
-        </p>
-        <img id="photo" />
-        <!-- <h3 class="title">Press Enter to continue to chat!</h3> -->
-        <!-- <input class="usernameInput" type="text" maxlength="14" /> -->
-        <div id="controls">
-          <button id="recordButtonHello">Record Hello</button>
-          <button id="recordButtonUrgent">Record Urgent</button>
+        <img class="saly" src="Saly-10.png" />
+        <h3 class="title">BMW Chat</h3>
+        <div class="descriptionarea">
+          <p class="description">Get message notifications with sounds unique to each user.</p>
+          <p class="description">Never miss an urgent message again.</p>
         </div>
+        <div class="instructionarea">
+          <p class="instruction">It's as easy as 1, 2, 3!</p>
+        </div>
+
+        <!-- | number | button | -->
+        <div class="stepsarea">
+          <table id="step1">
+            <tr>
+              <td class="tnum">
+                <div class="step fbrecord">1</div>
+              </td>
+              <td class="tpadding">
+              </td>
+              <td class="tbutton">
+                <div class="facebookLogin">
+                  <div class="fb-login-button" onlogin="checkLoginState();" data-width="210" data-size="medium" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="tnum">
+                <div class="step defaultrecord">2</div>
+              </td>
+              <td class="tpadding">
+              </td>
+              <td class="tbutton">
+                <p class="tdescription defaultrecord">Make your default chat sound</p>
+                <button class="recordButton" id="recordButtonHello">Record</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="tnum">
+                <div class="step urgentrecord">3</div>
+              </td>
+              <td class="tpadding">
+              </td>
+              <td class="tbutton">
+                <p class="tdescription urgentrecord">Make your urgent chat sound</p>
+                <button class="recordButton" id="recordButtonUrgent">Record</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+
         <button id="enter">Enter chat!</button>
       </div>
     </li>

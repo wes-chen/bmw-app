@@ -10,14 +10,7 @@ html {
 }
 
 html, input {
-  font-family:
-    "HelveticaNeue-Light",
-    "Helvetica Neue Light",
-    "Helvetica Neue",
-    Helvetica,
-    Arial,
-    "Lucida Grande",
-    sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 html, body {
@@ -53,37 +46,131 @@ ul {
 }
 
 .login.page .form {
-  height: 100px;
-  margin-top: -100px;
   position: absolute;
 
   text-align: center;
-  top: 10%;
+  top: 50px;
   width: 100%;
 }
 
-.login.page .form .usernameInput {
-  background-color: transparent;
-  border: none;
-  /* border-bottom: 2px solid #fff; */
-  outline: none;
-  padding-bottom: 15px;
-  text-align: center;
-  width: 400px;
+.saly {
+  margin-bottom:20px;
 }
 
 .login.page .title {
-  font-size: 200%;
+  font-size: 36px;
+  font-weight: 900;
+  margin:0px;
 }
 
-.login.page .usernameInput {
-  font-size: 200%;
-  letter-spacing: 3px;
+.login.page .description {
+  font-size: 16px;
+  font-weight: 400;
 }
 
-.login.page .title, .login.page .usernameInput {
+.login.page .tdescription {
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+.login.page .step {
+  height:30px;
+  width:30px;
+  color: #E8E8E8;
+
+  border: 1px solid #E8E8E8;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.login.page .instruction {
+  font-size: 16px;
+  font-weight: 400;
+  color: #A9A9A9;
+}
+
+
+.login.page .title, .login.page .description, .login.page .tdescription {
   color: #fff;
-  font-weight: 100;
+}
+
+.tnum {
+  width: 30px;
+}
+
+.tpadding {
+  width: 10px;
+}
+
+.tbutton {
+  width: 205px;
+  height: 30px;
+}
+
+.trow {
+  padding-bottom: 36px;
+}
+
+#step1 {
+  table-layout: fixed;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse:separate;
+  border-spacing: 0 36px;
+}
+
+.descriptionarea {
+  margin-top: 15px;
+  padding-left:40px;
+  padding-right:40px;
+}
+
+.instructionarea {
+  margin-top: 35px;
+  padding-left:90px;
+  padding-right:90px;
+}
+
+.stepsarea {
+  text-align: center;
+  padding-left:50px;
+  padding-right:50px;
+}
+
+.recordButton {
+  height: 30px;
+  width: 210px;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+}
+
+#enter {
+  margin-top:40px;
+  width: 250px;
+  height: 40px;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: center;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background-color: #767676;
 }
 
 /* Chat page */
