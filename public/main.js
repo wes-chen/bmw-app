@@ -49,6 +49,8 @@ $(function() {
       $currentInput = $inputMessage.focus();
 
       // Tell the server your username
+      ga('create', 'UA-191161303-2', 'auto');
+      ga("send", "event", 'username', 'set');
       socket.emit('add user', username);
     }
   }
