@@ -144,14 +144,13 @@ function inlineWorker() {
 }
 
 export class Recorder {
-  constructor(opts = {}, onStop = null) {
+  constructor(opts = {}, onStop) {
     // Can't use relative URL in blob worker, see:
     // https://stackoverflow.com/a/22582695
     this.wasmURL = new URL(opts.wasmURL || "/static/js/vmsg.wasm", location).href;
     this.shimURL = new URL(opts.shimURL || "/static/js/wasm-polyfill.js", location).href;
     this.onStop = onStop;
     this.pitch = opts.pitch || 0;
-    this.stream = null;
     this.audioCtx = null;
     this.gainNode = null;
     this.pitchFX = null;
@@ -168,7 +167,6 @@ export class Recorder {
   close() {
     if (this.encNode) this.encNode.disconnect();
     if (this.encNode) this.encNode.onaudioprocess = null;
-    if (this.stream) this.stopTracks();
     if (this.audioCtx) this.audioCtx.close();
     if (this.worker) this.worker.terminate();
     if (this.workerURL) URL.revokeObjectURL(this.workerURL);
@@ -198,8 +196,7 @@ export class Recorder {
           });
         };
 
-    return getUserMedia({audio: true}).then((stream) => {
-      this.stream = stream;
+    return getUserMedia({audio: true}).then(stream => {
       const audioCtx = this.audioCtx = new (window.AudioContext
         || window.webkitAudioContext)();
 
@@ -221,7 +218,7 @@ export class Recorder {
   }
 
   initWorker() {
-    if (!this.stream) throw new Error("missing audio initialization");
+    if (!this.audioCtx) throw new Error("missing audio initialization");
     // https://stackoverflow.com/a/19201292
     const blob = new Blob(
       ["(", inlineWorker.toString(), ")()"],
@@ -257,18 +254,12 @@ export class Recorder {
     });
   }
 
-  init() {
-    return this.initAudio().then(this.initWorker.bind(this));
-  }
-
   startRecording() {
-    if (!this.stream) throw new Error("missing audio initialization");
+    if (!this.audioCtx) throw new Error("missing audio initialization");
     if (!this.worker) throw new Error("missing worker initialization");
     this.blob = null;
     if (this.blobURL) URL.revokeObjectURL(this.blobURL);
     this.blobURL = null;
-    this.resolve = null;
-    this.reject = null;
     this.worker.postMessage({type: "start", data: this.audioCtx.sampleRate});
     this.encNode.onaudioprocess = (e) => {
       const samples = e.inputBuffer.getChannelData(0);
@@ -278,24 +269,23 @@ export class Recorder {
   }
 
   stopRecording() {
-    if (!this.stream) throw new Error("missing audio initialization");
-    if (!this.worker) throw new Error("missing worker initialization");
-    this.encNode.disconnect();
-    this.encNode.onaudioprocess = null;
-    this.stopTracks();
-    this.worker.postMessage({type: "stop", data: null});
-    return new Promise((resolve, reject) => {
+    const resultP = new Promise((resolve, reject) => {
+      if (this.encNode) {
+        this.encNode.disconnect();
+        this.encNode.onaudioprocess = null;
+      }
+
       this.resolve = resolve;
       this.reject = reject;
     });
-  }
 
-  stopTracks() {
-    // Might be missed in Safari and old FF/Chrome per MDN.
-    if (this.stream.getTracks) {
-      // Hide browser's recording indicator.
-      this.stream.getTracks().forEach((track) => track.stop());
+    if (this.worker) {
+      this.worker.postMessage({type: "stop", data: null});
+    } else {
+      return Promise.resolve(this.blob);
     }
+
+    return resultP;
   }
 }
 
@@ -318,7 +308,7 @@ export class Form {
     this.recorder.initAudio()
       .then(() => this.drawInit())
       .then(() => this.recorder.initWorker())
-      .then(() => this.drawAll(opts.urgent))
+      .then(() => this.drawAll())
       .catch((err) => this.drawError(err));
   }
 
@@ -350,15 +340,19 @@ export class Form {
     this.timer.textContent = pad2(secs / 60) + ":" + pad2(secs % 60);
   }
 
-  // TODO MYLINH add text to this popup
-  drawAll(urgent) {
+  drawAll() {
     this.drawInit();
     this.clearAll();
 
     const say = document.createElement("h3");
-    say.className = "record-header";
-    say.textContent = urgent ? "Say 'Urgent!' in your recording.": "Say 'Hello!' in your recording.";
+    say.className = "say center";
+    say.textContent = urgent ? "Say 'Urgent!' in your recording": "Say 'Hello!' in your recording";
     this.popup.appendChild(say);
+
+    const paren = document.createElement("p");
+    paren.className = "paren center";
+    paren.textContent = "(Tap on the duration to play back)"
+    this.popup.appendChild(paren);
 
     const recordRow = document.createElement("div");
     recordRow.className = "vmsg-record-row";
@@ -376,31 +370,6 @@ export class Form {
     stopBtn.textContent = "Stop";
     stopBtn.addEventListener("click", () => this.stopRecording());
     recordRow.appendChild(stopBtn);
-
-    const instructions1 = document.createElement("p");
-    instructions1.className = "record-header";
-    instructions1.textContent += "1. Tap on the red circle to begin recording.";
-    this.popup.appendChild(instructions1);
-
-    const instructions2 = document.createElement("p");
-    instructions2.className = "record-header";
-    instructions2.textContent += "2. Tap on the black square to stop recording.";
-    this.popup.appendChild(instructions2);
-
-    const instructions3 = document.createElement("p");
-    instructions3.className = "record-header";
-    instructions3.textContent += "3. Tap on the duration to play back.";
-    this.popup.appendChild(instructions3);
-
-    const instructions4 = document.createElement("p");
-    instructions4.className = "record-header";
-    instructions4.textContent += "4. Repeat steps 1-3 until you're ready!";
-    this.popup.appendChild(instructions4);
-
-    const instructions5 = document.createElement("p");
-    instructions5.className = "record-header";
-    instructions5.textContent += "5. Press the check mark when you're done!";
-    this.popup.appendChild(instructions5);
 
     const audio = this.audio = new Audio();
     audio.autoplay = true;
