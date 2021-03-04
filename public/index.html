@@ -10,6 +10,8 @@
   <link rel="shortcut icon" href="favicon.ico">
   <script src="audiorecord.js" type="module"></script>
   <script src="facebook.js"></script>
+  <!-- Include Handlebars from a CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 </head>
@@ -31,9 +33,12 @@
       <div class="form">
         <img class="saly" src="Saly-10.png" />
         <h3 class="title">BMW Chat</h3>
-        <div class="descriptionarea">
-          <p class="description">Get message notifications with sounds unique to each user.</p>
-          <p class="description">Never miss an urgent message again.</p>
+        <div id="descriptionarea">
+          <script id='descriptiontemplate' type="text/x-handlebars-template">
+            {{#each descriptions}}
+              <p class="description">{{description}}</p>
+            {{/each}}
+          </script>
         </div>
         <div class="instructionarea">
           <p class="instruction">It's as easy as 1, 2, 3!</p>
