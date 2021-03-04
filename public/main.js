@@ -9,7 +9,6 @@ $(function() {
 
   // Initialize variables
   const $window = $(window);
-  // const $soundInput = $('.soundInput'); // Input for sound
   const $messages = $('.messages');           // Messages area
   const $inputMessage = $('.inputMessage');   // Input message input box
 
@@ -224,11 +223,6 @@ $(function() {
 
   // Click events
 
-  // Focus input when clicking anywhere on login page
-  // $loginPage.click(() => {
-  //   $currentInput.focus();
-  // });
-
   $enterChatButton.click(()=>{
     console.log("enter chat clicked!")
     if (window.localStorage.getItem('helloSet') === "SET"
@@ -236,7 +230,6 @@ $(function() {
       && window.localStorage.getItem('fbSet') === "SET"){
       setUsername();
     } else {
-      // TODO show the errors here.
       if (window.localStorage.getItem('helloSet') !== "SET"){
         $(".defaultrecord").css("color","#FF7272")
         $(".defaultrecord").css("border-color","#FF7272")

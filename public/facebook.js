@@ -28,7 +28,4 @@ function changeUser(response){
     && window.localStorage.getItem('urgentSet') === "SET"){
       $("#enter").css("background-color","white")
   }
-
-    // $('#photo').attr("src", response.picture.data.url);
-  // console.log(response);
 }
