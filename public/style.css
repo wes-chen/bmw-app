@@ -261,6 +261,12 @@ ul {
   display: block;
 }
 
+/* Bottom Chat Grid Div */
+.grid-container {
+  display: inline-grid;
+  grid-column-gap: 10px;
+}
+
 /* chat bubble of message body */
 .messageBody.hello {
   margin-top: 5px;
@@ -301,5 +307,5 @@ ul {
   position: absolute;
   left: 20px;
   bottom: 20px;
-  width: 250px;
+  width: 70%;
 }
