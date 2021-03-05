@@ -261,6 +261,16 @@ ul {
   display: block;
 }
 
+/* Bottom Chat Grid Div */
+.grid-container {
+  display: flex;
+  width: 100%;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 20px;
+}
+
 /* chat bubble of message body */
 .messageBody.hello {
   margin-top: 5px;
@@ -298,8 +308,12 @@ ul {
   height: 30px;
   outline: none;
   padding-left: 10px;
-  position: absolute;
-  left: 20px;
-  bottom: 20px;
-  width: 250px;
+  flex: 1;
+  margin-left: 20px;
+}
+
+/* Empty div next to inputMessage */
+.empty-div {
+  height: 30px;
+  width: 120px;
 }
