@@ -17,6 +17,7 @@ $(function() {
   const $urgentButton = $('#urgent');         // urgent button
   const $normalButton = $('#normal');         // normal button
   const $enterChatButton = $('#enter');
+  const $muteButton = $('#mute');
   const socket = io();
 
   let blob;
@@ -265,6 +266,18 @@ $(function() {
     typing = false;
   });
 
+  $muteButton.click(() => {
+    if (window.localStorage.getItem('muted') === "FALSE"){
+      window.localStorage.setItem('muted', "TRUE");
+      $muteButton.attr("src", "unmuteall.png");
+    } else if (window.localStorage.getItem('muted') === "TRUE"){
+      window.localStorage.setItem('muted', "FALSE");
+      $muteButton.attr("src", "muteall.png");
+    } else {
+      console.log("mute button is terribly broken")
+    }
+  })
+
   // Socket events
 
   // Whenever the server emits 'login', log the login message
@@ -282,10 +295,12 @@ $(function() {
   socket.on('new message', (data) => {
     console.log(data);
     addChatMessage(data);
-    var blob = new Blob([data.sound], { 'type' : 'audio/mpeg' });
-    var url = URL.createObjectURL(blob);
-    var sound = new Audio(url);
-    sound.play();
+    if (window.localStorage.getItem('muted') === "FALSE"){
+      var blob = new Blob([data.sound], { 'type' : 'audio/mpeg' });
+      var url = URL.createObjectURL(blob);
+      var sound = new Audio(url);
+      sound.play();
+    }
   });
 
   // Whenever the server emits 'user joined', log it in the chat body
