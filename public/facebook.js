@@ -1,6 +1,7 @@
 function clearSet(){
   console.log("cleared settings")
   window.localStorage.clear();
+  window.localStorage.setItem('muted', "FALSE");
 
   var source = document.getElementById("descriptiontemplate").innerHTML;
   // compile the template

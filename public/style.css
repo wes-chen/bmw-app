@@ -217,6 +217,14 @@ ul {
   border-radius: 3px;
 }
 
+#mute {
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  height: 30px;
+  width: 30px;
+}
+
 /* Font */
 
 .messages {
