@@ -18,6 +18,7 @@ $(function() {
   const $normalButton = $('#normal');         // normal button
   const $enterChatButton = $('#enter');
   const $muteButton = $('#mute');
+  const $exitButton = $('#exit');
   const socket = io();
 
   let blob;
@@ -31,11 +32,11 @@ $(function() {
   const addParticipantsMessage = (data) => {
     let message = '';
     if (data.numUsers === 1) {
-      message += `there's 1 participant`;
+      message += `1 participant`;
     } else {
-      message += `there are ${data.numUsers} participants`;
+      message += `${data.numUsers} participants`;
     }
-    log(message);
+    $('#participants').text(message);
   }
 
   // Sets the client's username and sound?
@@ -276,6 +277,42 @@ $(function() {
     } else {
       console.log("mute button is terribly broken")
     }
+  })
+
+  $exitButton.click(()=> {
+    $chatPage.fadeOut();
+    $loginPage.show();
+    $chatPage.off('click');
+    $currentInput = $enterChatButton.focus();
+    window.localStorage.clear();
+    window.localStorage.setItem('muted', "FALSE");
+    //check if logout is
+    FB.getLoginStatus(function(ret) {
+        /// are they currently logged into Facebook?
+        if(ret.authResponse) {
+            //they were authed so do the logout
+            FB.logout(function(response) {
+              $('#fbloggedin').remove();
+              $('.fb-login-button').show();
+            });
+        } else {
+           ///do something if they aren't logged in
+           //or just get rid of this if you don't need to do something if they weren't logged in
+           $('#fbloggedin').remove();
+           $('.fb-login-button').show();
+        }
+    });
+    $("#recordButtonHello").css("background-color", "white");
+    $("#recordButtonHello").text("Record");
+    $("#descnorm").text("Make your default chat sound");
+    $(".defaultrecord").css("color","white")
+    $(".defaultrecord").css("border-color","white")
+    $("#recordButtonUrgent").css("background-color", "white");
+    $("#recordButtonUrgent").text("Record");
+    $("#descurg").text("Make your urgent chat sound");
+    $(".urgentrecord").css("color","white");
+    $(".urgentrecord").css("border-color","white");
+    $("#enter").css("background-color","#767676");
   })
 
   // Socket events

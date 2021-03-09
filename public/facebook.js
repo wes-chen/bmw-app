@@ -37,7 +37,7 @@ function changeUser(response){
   $('.fb-login-button').hide();
   console.log(response.first_name);
   if($('#name').length === 0){
-    $('.facebookLogin').append("<button class='recordButton' style='background-color: #CDFFB6'>Logged in as <span id='name'>"+response.first_name+"</span></button>");
+    $('.facebookLogin').append("<button class='recordButton' id='fbloggedin' style='background-color: #CDFFB6'>Logged in as <span id='name'>"+response.first_name+"</span></button>");
   }
 
   $(".fbrecord").css("color","white")

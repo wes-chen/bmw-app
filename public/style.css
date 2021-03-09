@@ -217,12 +217,100 @@ ul {
   border-radius: 3px;
 }
 
-#mute {
+#exit {
   position: absolute;
   right: 25px;
   top: 25px;
-  height: 30px;
-  width: 30px;
+  height: 20px;
+  width: 20px;
+}
+
+#exitlabel {
+  position: absolute;
+  right: 15px;
+  top: 50px;
+  height: 10px;
+  width: 40px;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 10px;
+  letter-spacing: 0em;
+  text-align: center;
+  margin: 0px;
+  color: white;
+}
+
+#mute {
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  height: 20px;
+  width: 20px;
+}
+
+#mutelabel {
+  position: absolute;
+  left: 15px;
+  top: 50px;
+  height: 10px;
+  width: 40px;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 10px;
+  letter-spacing: 0em;
+  text-align: center;
+  margin: 0px;
+  color: white;
+}
+
+#chatBanner {
+  height: 80px;
+  width: 100%;
+  background-color: black;
+  text-align: center;
+}
+
+#bmw {
+  position: absolute;
+  margin-left:auto;
+  margin-right: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  left:0;
+  right:0;
+  top: 24px;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: white;
+}
+
+
+#participants {
+  position: absolute;
+  margin-left:auto;
+  margin-right: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  left:0;
+  right:0;
+  top: 50px;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 10px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #A8A8A8;
 }
 
 /* Font */
@@ -246,7 +334,7 @@ ul {
 /* Messages */
 
 .chatArea {
-  height: 100%;
+  height: calc(100% - 80px);
   padding-bottom: 60px;
 }
 
