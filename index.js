@@ -41,7 +41,20 @@ io.on('connection', (socket) => {
 
   // when the client emits 'add user', this listens and executes
   socket.on('add user', (username) => {
-    if (addedUser) return;
+    if (addedUser) {
+      // edit the username
+      // echo globally that this client has left
+      socket.broadcast.emit('user left', {
+        username: socket.username,
+        numUsers: numUsers
+      });
+      socket.username = username;
+      socket.broadcast.emit('user joined', {
+        username: socket.username,
+        numUsers: numUsers
+      })
+      return;
+    }
 
     // we store the username in the socket session for this client
     socket.username = username;
