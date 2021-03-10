@@ -28,6 +28,7 @@ $(function() {
   let typing = false;
   let lastTypingTime;
   let $currentInput = $enterChatButton.focus();
+  let entered = false;
 
   const addParticipantsMessage = (data) => {
     let message = '';
@@ -45,6 +46,7 @@ $(function() {
 
     // If the username is valid
     if (username) {
+      entered = true;
       $loginPage.fadeOut();
       $chatPage.show();
       $loginPage.off('click');
@@ -280,6 +282,7 @@ $(function() {
   })
 
   $exitButton.click(()=> {
+    entered = false;
     $chatPage.fadeOut();
     $loginPage.show();
     $chatPage.off('click');
@@ -332,7 +335,7 @@ $(function() {
   socket.on('new message', (data) => {
     console.log(data);
     addChatMessage(data);
-    if (window.localStorage.getItem('muted') === "FALSE"){
+    if (window.localStorage.getItem('muted') === "FALSE" && entered){
       var blob = new Blob([data.sound], { 'type' : 'audio/mpeg' });
       var url = URL.createObjectURL(blob);
       var sound = new Audio(url);
