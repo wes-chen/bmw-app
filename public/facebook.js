@@ -4,7 +4,7 @@ function clearSet(){
   window.localStorage.setItem('muted', "FALSE");
 
   var source = document.getElementById("descriptiontemplate").innerHTML;
-  compile the template
+  // compile the template
   var template = Handlebars.compile(source);
   // execute the compiled template and print the output to the console
   var context = {
