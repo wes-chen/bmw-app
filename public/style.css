@@ -54,7 +54,7 @@ ul {
 
 .login.page .form {
   position: absolute;
-
+  background-color: black;
   text-align: center;
   top: 50px;
   width: 100%;
