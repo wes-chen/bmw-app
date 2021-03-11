@@ -22,7 +22,6 @@ $(function() {
   const socket = io();
 
   let blob;
-  // Prompt for setting a username
   let username;
   let connected = false;
   let typing = false;
@@ -70,7 +69,6 @@ $(function() {
       addChatMessage({ username, message, urgent }, true);
       // tell server to execute 'new message' and send along one parameter
       let soundURL = urgent ? window.localStorage.getItem('urgentURL') : window.localStorage.getItem('helloURL');
-      // console.log("I SENT A MESSAGE AND THE URL IS: ", helloURL);
       fetch(soundURL)
         .then(r => r.blob())
         .then(data => socket.emit('new message', message, data, urgent));
@@ -86,7 +84,6 @@ $(function() {
   // Adds the visual chat message to the message list
   const addChatMessage = (data, options) => {
     // Don't fade the message in if there is an 'X was typing'
-    console.log("options" + options);
     const $typingMessages = getTypingMessages(data);
     if ($typingMessages.length !== 0) {
       $typingMessages.remove();
@@ -102,7 +99,6 @@ $(function() {
       messageBodyClass = data.urgent ? 'urgent' : 'hello';
     }
 
-    // TODO Bri: options is a boolean with True if it is sent by the user, Undefined if it is not
     const $messageBodyDiv = $('<span class="messageBody">')
       .addClass(messageBodyClass)
       .text(data.message);
@@ -230,7 +226,6 @@ $(function() {
   // Click events
 
   $enterChatButton.click(()=>{
-    console.log("enter chat clicked!")
     if (window.localStorage.getItem('helloSet') === "SET"
       && window.localStorage.getItem('urgentSet') === "SET"
       && window.localStorage.getItem('fbSet') === "SET"){
@@ -299,8 +294,6 @@ $(function() {
               $('.fb-login-button').show();
             });
         } else {
-           ///do something if they aren't logged in
-           //or just get rid of this if you don't need to do something if they weren't logged in
            $('#fbloggedin').remove();
            $('.fb-login-button').show();
         }
@@ -333,7 +326,6 @@ $(function() {
 
   // Whenever the server emits 'new message', update the chat body
   socket.on('new message', (data) => {
-    console.log(data);
     addChatMessage(data);
     if (window.localStorage.getItem('muted') === "FALSE" && entered){
       var blob = new Blob([data.sound], { 'type' : 'audio/mpeg' });

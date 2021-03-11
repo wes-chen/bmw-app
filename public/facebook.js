@@ -1,5 +1,4 @@
 function clearSet(){
-  console.log("cleared settings")
   window.localStorage.clear();
   window.localStorage.setItem('muted', "FALSE");
 
@@ -34,14 +33,12 @@ function checkLoginState(){
 
 function statusChangeCallback(response){
   if (response.status === 'connected'){
-    console.log('Successfully logged in with Facebook');
     window.localStorage.setItem('fbSet', "SET");
     FB.api('/me?fields=first_name', changeUser);
   }
 }
 function changeUser(response){
   $('.fb-login-button').hide();
-  console.log(response.first_name);
   if($('#name').length === 0){
     $('.facebookLogin').append("<button class='recordButton' id='fbloggedin' style='background-color: #CDFFB6'>Logged in as <span id='name'>"+response.first_name+"</span></button>");
   }
