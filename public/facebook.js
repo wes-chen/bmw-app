@@ -19,10 +19,10 @@ function clearSet(){
   html = template(context);
   $("#descriptionarea").append(html);
 
-  $(".defaultrecord").css("color","#FF7272")
-  $(".defaultrecord").css("border-color","#FF7272")
-  $(".urgentrecord").css("color","#FF7272")
-  $(".urgentrecord").css("border-color","#FF7272")
+  $("#recordButtonHello").css("background-color", "white");
+  $("#recordButtonHello").text("Record");
+  $("#recordButtonUrgent").css("background-color", "white");
+  $("#recordButtonUrgent").text("Record");
 
 }
 
