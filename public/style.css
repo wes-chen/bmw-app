@@ -127,7 +127,7 @@ ul {
   margin-left: auto;
   margin-right: auto;
   border-collapse:separate;
-  border-spacing: 0 36px;
+  border-spacing: 0 24px;
 }
 
 #descriptionarea {
@@ -137,7 +137,6 @@ ul {
 }
 
 .instructionarea {
-  margin-top: 35px;
   padding-left:90px;
   padding-right:90px;
 }
